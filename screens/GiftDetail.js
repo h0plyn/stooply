@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 
@@ -27,10 +27,26 @@ export default function GiftDetail({ route, navigation }) {
         <Text>Stooped on {added}</Text>
         <View style={{ flexDirection: 'row', margin: 10 }}>
           <View style={{ flexDirection: 'row', margin: 5 }}>
-            <MaterialIcons name="thumb-up" size={22} />
+            <MaterialIcons
+              name="thumb-up"
+              size={22}
+              onPress={() =>
+                navigation.setParams({
+                  info: { ...route.params.info, thumbsUp: thumbsUp + 1 },
+                })
+              }
+            />
           </View>
           <View style={{ flexDirection: 'row', margin: 5 }}>
-            <MaterialIcons name="thumb-down" size={22} />
+            <MaterialIcons
+              name="thumb-down"
+              size={22}
+              onPress={() =>
+                navigation.setParams({
+                  info: { ...route.params.info, thumbsDown: thumbsDown + 1 },
+                })
+              }
+            />
           </View>
         </View>
         <View style={{ flexDirection: 'row', margin: 5 }}>
@@ -40,7 +56,7 @@ export default function GiftDetail({ route, navigation }) {
           </View>
           <View style={{ flexDirection: 'row', margin: 5 }}>
             <Text>{thumbsDown}</Text>
-            <MaterialIcons name="thumb-down" color="#ff3784" size={18} />
+            <MaterialIcons name="thumb-down" color="#fd5240" size={18} />
           </View>
         </View>
         <Text>Comments</Text>

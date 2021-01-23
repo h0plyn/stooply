@@ -73,7 +73,7 @@ export default function List({ navigation }) {
               <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
                 <MaterialIcons name="thumb-up" color="#00c87b" size={18} />
                 <Text>{item.info.thumbsDown}</Text>
-                <MaterialIcons name="thumb-down" color="#ff3784" size={18} />
+                <MaterialIcons name="thumb-down" color="#fd5240" size={18} />
                 <Text>{item.info.thumbsUp}</Text>
               </View>
             </View>
