@@ -1,9 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
-import * as Location from 'expo-location';
-import * as Permissions from 'expo-permissions';
+import { StatusBar } from 'expo-status-bar'
+import React, { useState } from 'react'
+import { StyleSheet, View, Text, Button } from 'react-native'
+import MapView, { Marker } from 'react-native-maps'
+import { createStackNavigator } from '@react-navigation/stack'
+import { NavigationContainer } from '@react-navigation/native'
 
 const dummyData = [
   {
@@ -18,29 +18,16 @@ const dummyData = [
     latitude: 40.678005,
     longitude: -74.010903,
   },
-];
+]
 
-export default function App() {
-  const [error, setError] = useState(null);
+function Map() {
+  const [error, setError] = useState(null)
   const [region, setRegion] = useState({
     latitude: 51.5079145,
     longitude: -0.0899163,
     latitudeDelta: 0.01,
     longitudeDelta: 0.01,
-  });
-
-  useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestPermissionsAsync();
-      if (status !== 'granted') {
-        setError('Permission to access location was denied');
-        return;
-      }
-      let location = await Location.getCurrentPositionAsync();
-      setRegion(location);
-      console.log('REGION', region);
-    })();
-  }, []);
+  })
 
   return (
     <View style={styles.container}>
@@ -53,14 +40,54 @@ export default function App() {
           longitudeDelta: 0.05,
         }}
       >
-        <Marker coordinate={dummyData[0]} />
-        <Marker coordinate={dummyData[1]} />
-        <Marker coordinate={dummyData[2]} />
+        {dummyData.map((data, idx) => {
+          console.log(data)
+          return (
+            <Marker
+              coordinate={{
+                latitude: data.latitude,
+                longitude: data.longitude,
+              }}
+              key={idx}
+            />
+          )
+        })}
       </MapView>
 
       <StatusBar style="auto" />
     </View>
-  );
+  )
+}
+
+function HomeScreen({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titleText}>Stooply</Text>
+      <View style={{ flex: 2, flexDirection: 'row' }}>
+        <Button title="Browse" onPress={() => navigation.navigate('Map')} />
+        <Text style={styles.paragraph}>About</Text>
+      </View>
+    </View>
+  )
+}
+
+const Stack = createStackNavigator()
+
+function HomeStack() {
+  return (
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen name="Stooply" component={HomeScreen} />
+      <Stack.Screen name="Map" component={Map} />
+    </Stack.Navigator>
+  )
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <HomeStack />
+    </NavigationContainer>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -70,4 +97,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+  titleText: {
+    fontSize: 24,
+  },
+  paragraph: {
+    marginVertical: 8,
+    lineHeight: 20,
+    padding: 10,
+    fontSize: 20,
+  },
+})
