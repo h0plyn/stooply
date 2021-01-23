@@ -13,32 +13,50 @@ export default function GiftDetail({ route, navigation }) {
   } = route.params.info
   return (
     <View style={styles.container}>
-      <Text>{imageUrl}</Text>
-      <Text>{title}</Text>
-      <Text>{description}</Text>
-      <Text>{added}</Text>
-      <Text>
-        Thumbs up: {thumbsUp} — Thumbs Down: {thumbsDown}
-      </Text>
-      <Text>Comments</Text>
+      <View style={styles.box}></View>
+      <View style={styles.details}>
+        <Text>{title}</Text>
+        <Text>{description}</Text>
+        <Text>Stooped on {added}</Text>
+        <Text>
+          Thumbs up: {thumbsUp} — Thumbs Down: {thumbsDown}
+        </Text>
+        <Text>Comments</Text>
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
+    flex: 1,
     backgroundColor: '#fff',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
   titleText: {
     fontSize: 24,
+  },
+  box: {
+    backgroundColor: 'tomato',
+    height: '50%',
+    width: '80%',
+    marginHorizontal: 100,
+    marginVertical: 50,
+    borderRadius: 10,
   },
   paragraph: {
     marginVertical: 8,
     lineHeight: 20,
     padding: 10,
     fontSize: 20,
+  },
+  details: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    width: '80%',
+  },
+  Text: {
+    marginVertical: 10,
   },
 })
