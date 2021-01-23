@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
+import { MaterialIcons } from '@expo/vector-icons'
 
 export default function GiftDetail({ route, navigation }) {
   console.log(route.params)
@@ -22,10 +23,26 @@ export default function GiftDetail({ route, navigation }) {
       <View style={styles.details}>
         <Text>{title}</Text>
         <Text>{description}</Text>
+
         <Text>Stooped on {added}</Text>
-        <Text>
-          Thumbs up: {thumbsUp} — Thumbs Down: {thumbsDown}
-        </Text>
+        <View style={{ flexDirection: 'row', margin: 10 }}>
+          <View style={{ flexDirection: 'row', margin: 5 }}>
+            <MaterialIcons name="thumb-up" size={22} />
+          </View>
+          <View style={{ flexDirection: 'row', margin: 5 }}>
+            <MaterialIcons name="thumb-down" size={22} />
+          </View>
+        </View>
+        <View style={{ flexDirection: 'row', margin: 5 }}>
+          <View style={{ flexDirection: 'row', margin: 5 }}>
+            <Text>{thumbsUp}</Text>
+            <MaterialIcons name="thumb-up" color="#00c87b" size={18} />
+          </View>
+          <View style={{ flexDirection: 'row', margin: 5 }}>
+            <Text>{thumbsDown}</Text>
+            <MaterialIcons name="thumb-down" color="#ff3784" size={18} />
+          </View>
+        </View>
         <Text>Comments</Text>
       </View>
     </View>

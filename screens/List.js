@@ -1,6 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native'
 import React from 'react'
 import { Text, View, FlatList, TouchableOpacity, Image } from 'react-native'
+import { MaterialIcons } from '@expo/vector-icons'
 
 const dummyData = [
   {
@@ -69,6 +70,12 @@ export default function List({ navigation }) {
             <View>
               <Text>{item.info.title}</Text>
               <Text>{item.info.added}</Text>
+              <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
+                <MaterialIcons name="thumb-up" color="#00c87b" size={18} />
+                <Text>{item.info.thumbsDown}</Text>
+                <MaterialIcons name="thumb-down" color="#ff3784" size={18} />
+                <Text>{item.info.thumbsUp}</Text>
+              </View>
             </View>
           </View>
         </TouchableOpacity>
