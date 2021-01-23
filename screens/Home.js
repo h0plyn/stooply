@@ -3,6 +3,20 @@ import { StatusBar } from 'expo-status-bar'
 import MapView, { Marker } from 'react-native-maps'
 import { View, StyleSheet, Text, Button } from 'react-native'
 
+const giftData = {
+  latitude: 40.679728,
+  longitude: -74.014908,
+  info: {
+    imageUrl: 'www.url.com',
+    title: 'Suitcase',
+    description: 'an old suitcase',
+    added: '1/7/21',
+    thumbsUp: 6,
+    thumbsDown: 9,
+    comments: [],
+  },
+}
+
 export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
@@ -12,7 +26,7 @@ export default function Home({ navigation }) {
         <Button title="About" onPress={() => navigation.navigate('About')} />
         <Button
           title="Gift"
-          onPress={() => navigation.navigate('GiftDetail')}
+          onPress={() => navigation.navigate('GiftDetail', giftData)}
         />
       </View>
     </View>

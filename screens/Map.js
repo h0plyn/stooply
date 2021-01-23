@@ -7,6 +7,15 @@ const dummyData = [
   {
     latitude: 40.679728,
     longitude: -74.014908,
+    info: {
+      imageUrl: 'www.url.com',
+      title: 'Suitcase',
+      description: 'an old suitcase',
+      added: '1/7/21',
+      thumbsUp: 6,
+      thumbsDown: 9,
+      comments: [],
+    },
   },
   {
     latitude: 40.674812,

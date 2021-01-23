@@ -1,14 +1,25 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-export default function GiftDetail({ navigation }) {
+export default function GiftDetail({ route, navigation }) {
+  console.log(route.params)
+  const {
+    imageUrl,
+    title,
+    description,
+    added,
+    thumbsUp,
+    thumbsDown,
+  } = route.params.info
   return (
     <View style={styles.container}>
-      <Text>Gift Image</Text>
-      <Text>Gift Title</Text>
-      <Text>Gift Description</Text>
-      <Text>Time since Posted</Text>
-      <Text>Thumbs up or Thumbs Down</Text>
+      <Text>{imageUrl}</Text>
+      <Text>{title}</Text>
+      <Text>{description}</Text>
+      <Text>{added}</Text>
+      <Text>
+        Thumbs up: {thumbsUp} — Thumbs Down: {thumbsDown}
+      </Text>
       <Text>Comments</Text>
     </View>
   )
