@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
-import MapView, { Marker } from 'react-native-maps'
-import { View, StyleSheet } from 'react-native'
+import MapView, { Marker, Callout } from 'react-native-maps'
+import { View, StyleSheet, Text } from 'react-native'
 
 const dummyData = [
   {
@@ -56,7 +56,12 @@ export default function Map({ navigation }) {
                 longitude: data.longitude,
               }}
               key={idx}
-            />
+              pinColor="blue"
+            >
+              <Callout>
+                <Text>{dummyData[0].info.title}</Text>
+              </Callout>
+            </Marker>
           )
         })}
       </MapView>
