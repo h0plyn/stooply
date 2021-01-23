@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native'
 
 export default function GiftDetail({ route, navigation }) {
   console.log(route.params)
@@ -13,7 +13,12 @@ export default function GiftDetail({ route, navigation }) {
   } = route.params.info
   return (
     <View style={styles.container}>
-      <View style={styles.box}></View>
+      <Image
+        style={styles.box}
+        source={{
+          uri: imageUrl,
+        }}
+      />
       <View style={styles.details}>
         <Text>{title}</Text>
         <Text>{description}</Text>

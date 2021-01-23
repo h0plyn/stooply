@@ -8,7 +8,8 @@ const dummyData = [
     latitude: 40.679728,
     longitude: -74.014908,
     info: {
-      imageUrl: 'www.url.com',
+      imageUrl:
+        'https://pbs.twimg.com/media/EjQw1BsUwAEwj5F?format=jpg&name=4096x4096',
       title: 'Books',
       description: 'A box full of the classics',
       added: '1/7/21',
@@ -21,7 +22,8 @@ const dummyData = [
     latitude: 40.674812,
     longitude: -74.016092,
     info: {
-      imageUrl: 'www.url.com',
+      imageUrl:
+        'http://www.bunboyeatsnyc.com/wp-content/uploads/2016/04/IMG_5571-1.jpg',
       title: 'BBQ',
       description: 'Free BBQ today at 12PM',
       added: '1/7/21',
@@ -34,7 +36,8 @@ const dummyData = [
     latitude: 40.678005,
     longitude: -74.010903,
     info: {
-      imageUrl: 'www.url.com',
+      imageUrl:
+        'https://viewcameraaustralia.org/wp-content/uploads/2018/01/main-photo-chamonix-45f-1-1020x680.jpg',
       title: 'Camera',
       description: 'Sony a7RIV. Works great.',
       added: '1/7/21',
@@ -76,8 +79,12 @@ export default function Map({ navigation }) {
               key={idx}
               pinColor="blue"
             >
-              <Callout onPress={() => navigation.navigate('GiftDetail', data)}>
-                <Text>{data.info.title}</Text>
+              <Callout
+                style={styles.callout}
+                tooltip={true}
+                onPress={() => navigation.navigate('GiftDetail', data)}
+              >
+                <Text style={styles.calloutText}>{data.info.title}</Text>
               </Callout>
             </Marker>
           )
@@ -104,5 +111,13 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     padding: 10,
     fontSize: 20,
+  },
+  callout: {
+    backgroundColor: 'blue',
+    padding: 10,
+    borderRadius: 5,
+  },
+  calloutText: {
+    color: 'white',
   },
 })
