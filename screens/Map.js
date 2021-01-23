@@ -9,7 +9,7 @@ const dummyData = [
     longitude: -74.014908,
     info: {
       imageUrl: 'www.url.com',
-      title: 'Suitcase',
+      title: 'Books',
       description: 'an old suitcase',
       added: '1/7/21',
       thumbsUp: 6,
@@ -20,10 +20,28 @@ const dummyData = [
   {
     latitude: 40.674812,
     longitude: -74.016092,
+    info: {
+      imageUrl: 'www.url.com',
+      title: 'BBQ',
+      description: 'an old suitcase',
+      added: '1/7/21',
+      thumbsUp: 6,
+      thumbsDown: 9,
+      comments: [],
+    },
   },
   {
     latitude: 40.678005,
     longitude: -74.010903,
+    info: {
+      imageUrl: 'www.url.com',
+      title: 'Camera',
+      description: 'an old suitcase',
+      added: '1/7/21',
+      thumbsUp: 6,
+      thumbsDown: 9,
+      comments: [],
+    },
   },
 ]
 
@@ -48,7 +66,7 @@ export default function Map({ navigation }) {
         }}
       >
         {dummyData.map((data, idx) => {
-          console.log(data)
+          console.log('DATA', data)
           return (
             <Marker
               coordinate={{
@@ -59,7 +77,7 @@ export default function Map({ navigation }) {
               pinColor="blue"
             >
               <Callout>
-                <Text>{dummyData[0].info.title}</Text>
+                <Text>{data.info.title}</Text>
               </Callout>
             </Marker>
           )
