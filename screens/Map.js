@@ -10,7 +10,7 @@ const dummyData = [
     info: {
       imageUrl: 'www.url.com',
       title: 'Books',
-      description: 'an old suitcase',
+      description: 'A box full of the classics',
       added: '1/7/21',
       thumbsUp: 6,
       thumbsDown: 9,
@@ -23,7 +23,7 @@ const dummyData = [
     info: {
       imageUrl: 'www.url.com',
       title: 'BBQ',
-      description: 'an old suitcase',
+      description: 'Free BBQ today at 12PM',
       added: '1/7/21',
       thumbsUp: 6,
       thumbsDown: 9,
@@ -36,7 +36,7 @@ const dummyData = [
     info: {
       imageUrl: 'www.url.com',
       title: 'Camera',
-      description: 'an old suitcase',
+      description: 'Sony a7RIV. Works great.',
       added: '1/7/21',
       thumbsUp: 6,
       thumbsDown: 9,
@@ -76,7 +76,7 @@ export default function Map({ navigation }) {
               key={idx}
               pinColor="blue"
             >
-              <Callout>
+              <Callout onPress={() => navigation.navigate('GiftDetail', data)}>
                 <Text>{data.info.title}</Text>
               </Callout>
             </Marker>
