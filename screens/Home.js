@@ -7,9 +7,13 @@ export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.titleText}>Stooply</Text>
-      <View style={{ flex: 2, flexDirection: 'row' }}>
+      <View>
         <Button title="Browse" onPress={() => navigation.navigate('Map')} />
         <Button title="About" onPress={() => navigation.navigate('About')} />
+        <Button
+          title="Gift"
+          onPress={() => navigation.navigate('GiftDetail')}
+        />
       </View>
     </View>
   )

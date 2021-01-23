@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import Home from './screens/Home'
 import About from './screens/About'
 import Map from './screens/Map'
+import GiftDetail from './screens/GiftDetail'
 
 const Stack = createStackNavigator()
 
@@ -14,6 +15,7 @@ function HomeStack() {
       <Stack.Screen name="Stooply" component={Home} />
       <Stack.Screen name="Map" component={Map} />
       <Stack.Screen name="About" component={About} />
+      <Stack.Screen name="GiftDetail" component={GiftDetail} />
     </Stack.Navigator>
   )
 }
