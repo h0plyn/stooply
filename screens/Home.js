@@ -8,7 +8,11 @@ export default function Home({ navigation }) {
     <View style={styles.container}>
       <Text style={styles.titleText}>Stooply</Text>
       <View>
-        <Button title="Browse" onPress={() => navigation.navigate('Map')} />
+        <Button title="Browse Map" onPress={() => navigation.navigate('Map')} />
+        <Button
+          title="Browse List"
+          onPress={() => navigation.navigate('List')}
+        />
         <Button title="About" onPress={() => navigation.navigate('About')} />
       </View>
     </View>

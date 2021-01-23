@@ -6,6 +6,7 @@ import Home from './screens/Home'
 import About from './screens/About'
 import Map from './screens/Map'
 import GiftDetail from './screens/GiftDetail'
+import List from './screens/List'
 
 const Stack = createStackNavigator()
 
@@ -16,6 +17,7 @@ function HomeStack() {
       <Stack.Screen name="Map" component={Map} />
       <Stack.Screen name="About" component={About} />
       <Stack.Screen name="GiftDetail" component={GiftDetail} />
+      <Stack.Screen name="List" component={List} />
     </Stack.Navigator>
   )
 }
