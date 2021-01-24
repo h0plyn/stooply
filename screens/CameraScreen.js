@@ -42,7 +42,7 @@ export default function CameraScreen({ navigation }) {
           }}
         >
           <TouchableOpacity
-            style={{ flex: 0.1, alignSelf: 'flex-end' }}
+            style={{ flex: 0.1, alignSelf: 'flex-end', marginRight: 50 }}
             onPress={() => {
               setType(
                 type === Camera.Constants.Type.back
@@ -75,6 +75,7 @@ export default function CameraScreen({ navigation }) {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
+                marginBottom: 50,
               }}
             >
               <View

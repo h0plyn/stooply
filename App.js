@@ -8,6 +8,7 @@ import List from './screens/List'
 import GiftDetail from './screens/GiftDetail'
 import About from './screens/About'
 import CameraScreen from './screens/CameraScreen'
+import ImageScreen from './screens/ImageScreen'
 
 const Stack = createStackNavigator()
 
@@ -20,6 +21,7 @@ function HomeStack() {
       <Stack.Screen name="GiftDetail" component={GiftDetail} />
       <Stack.Screen name="List" component={List} />
       <Stack.Screen name="CameraScreen" component={CameraScreen} />
+      <Stack.Screen name="Image" component={ImageScreen} />
     </Stack.Navigator>
   )
 }
