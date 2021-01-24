@@ -9,6 +9,7 @@ import GiftDetail from './screens/GiftDetail'
 import About from './screens/About'
 import CameraScreen from './screens/CameraScreen'
 import ImageScreen from './screens/ImageScreen'
+import base from './server/base'
 
 const Stack = createStackNavigator()
 
