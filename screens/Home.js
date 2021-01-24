@@ -18,6 +18,10 @@ export default function Home({ navigation }) {
           title="Camera"
           onPress={() => navigation.navigate('CameraScreen')}
         />
+        <Button
+          title="Add Item"
+          onPress={() => navigation.navigate('AddItem')}
+        />
       </View>
     </View>
   )
