@@ -66,7 +66,7 @@ export default function List({ navigation }) {
                 uri: item.info.imageUrl,
               }}
             />
-
+            {/* Break out into ListCard */}
             <View>
               <Text>{item.info.title}</Text>
               <Text>{item.info.added}</Text>
@@ -77,6 +77,7 @@ export default function List({ navigation }) {
                 <Text>{item.info.thumbsUp}</Text>
               </View>
             </View>
+            {/* End ListCard */}
           </View>
         </TouchableOpacity>
       )}

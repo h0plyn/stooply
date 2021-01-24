@@ -3,10 +3,11 @@ import { StyleSheet, View, Text, Button } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
 import Home from './screens/Home'
-import About from './screens/About'
 import Map from './screens/Map'
-import GiftDetail from './screens/GiftDetail'
 import List from './screens/List'
+import GiftDetail from './screens/GiftDetail'
+import About from './screens/About'
+import CameraScreen from './screens/CameraScreen'
 
 const Stack = createStackNavigator()
 
@@ -18,6 +19,7 @@ function HomeStack() {
       <Stack.Screen name="About" component={About} />
       <Stack.Screen name="GiftDetail" component={GiftDetail} />
       <Stack.Screen name="List" component={List} />
+      <Stack.Screen name="CameraScreen" component={CameraScreen} />
     </Stack.Navigator>
   )
 }

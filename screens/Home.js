@@ -14,6 +14,10 @@ export default function Home({ navigation }) {
           onPress={() => navigation.navigate('List')}
         />
         <Button title="About" onPress={() => navigation.navigate('About')} />
+        <Button
+          title="Camera"
+          onPress={() => navigation.navigate('CameraScreen')}
+        />
       </View>
     </View>
   )

@@ -69,7 +69,6 @@ export default function Map({ navigation }) {
         }}
       >
         {dummyData.map((data, idx) => {
-          console.log('DATA', data)
           return (
             <Marker
               coordinate={{
@@ -77,7 +76,7 @@ export default function Map({ navigation }) {
                 longitude: data.longitude,
               }}
               key={idx}
-              pinColor="blue"
+              pinColor="black"
             >
               <Callout
                 style={styles.callout}
@@ -113,7 +112,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   callout: {
-    backgroundColor: 'blue',
+    backgroundColor: 'black',
     padding: 10,
     borderRadius: 5,
   },
