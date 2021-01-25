@@ -1,16 +1,73 @@
-import React from 'react'
-import { View, TextInput, StyleSheet, Button } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, TextInput, StyleSheet, Button, Image, Alert } from 'react-native'
 import { Formik } from 'formik'
+import * as ImagePicker from 'expo-image-picker'
+import * as firebase from 'firebase'
+import secrets from '../secrets'
 
-export default function AddForm(props) {
+if (!firebase.apps.length) {
+  firebase.initializeApp(secrets)
+} else {
+  firebase.app() // if already initialized, use that one
+}
+
+export default function AddForm() {
+  const [image, setImage] = useState(null)
+
+  useEffect(() => {
+    ;(async () => {
+      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
+      if (status !== 'granted') {
+        alert('Sorry, we need camera roll permissions to make this work!')
+      }
+    })()
+  }, [])
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: false,
+      aspect: [4, 3],
+      quality: 1,
+    })
+
+    console.log(result)
+
+    if (!result.cancelled) {
+      let fileName = result.uri.substring(result.uri.lastIndexOf('/') + 1)
+      setImage(result.uri)
+      uploadImage(result.uri, fileName)
+        .then(() => Alert.alert('Image Added!'))
+        .catch((err) => console.log(err))
+    }
+  }
+
+  const uploadImage = async (uri, imageName) => {
+    const response = await fetch(uri)
+    const blob = await response.blob()
+
+    let ref = firebase.storage().ref().child(imageName)
+
+    return ref
+      .put(blob)
+      .then(() => ref.getDownloadURL())
+      .then((downloadURL) => setImage(downloadURL))
+      .catch((err) => console.log(err))
+  }
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Formik
         initialValues={{ title: '', description: '' }}
         onSubmit={(values, actions) => {
           actions.resetForm()
+          values.imageUrl = image
           console.log(values)
-          // Do Something
+          // Take the picture
+          // Confirm the image
+          // On Confirm, redirect to Form Modal
+          // Save the imageUrl to the currentItem
+          // Add the text inputs to the currentItem
         }}
       >
         {(props) => (
@@ -30,7 +87,7 @@ export default function AddForm(props) {
               placeholder="Description"
               style={styles.input}
               onChangeText={props.handleChange('description')}
-              value={props.values.rating}
+              value={props.values.description}
               keyboardAppearance="dark"
               placeholderTextColor="grey"
               onBlur={props.handleBlur('rating')}
@@ -39,6 +96,10 @@ export default function AddForm(props) {
           </View>
         )}
       </Formik>
+      <Button title="Pick an image from camera roll" onPress={pickImage} />
+      {image && (
+        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+      )}
     </View>
   )
 }

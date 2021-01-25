@@ -1,4 +1,3 @@
-import { NavigationContainer } from '@react-navigation/native'
 import React from 'react'
 import { Text, View, FlatList, TouchableOpacity, Image } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'

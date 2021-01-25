@@ -10,7 +10,6 @@ import About from './screens/About'
 import CameraScreen from './screens/CameraScreen'
 import ImageScreen from './screens/ImageScreen'
 import AddItem from './screens/AddItem'
-import base from './server/base'
 
 const Stack = createStackNavigator()
 
