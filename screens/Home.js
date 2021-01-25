@@ -74,7 +74,7 @@ const MainView = styled.ScrollView`
   border: black;
   border-width: 5px;
   width: 80%;
-  border-radius: 10px;
+  border-radius: 10px
 `
 const Footer = styled.View`
   display: flex;

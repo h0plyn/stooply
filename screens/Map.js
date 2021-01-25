@@ -1,21 +1,8 @@
 import React, { useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import MapView, { Marker, Callout } from 'react-native-maps'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text, Modal } from 'react-native'
 import styled from 'styled-components'
-
-const Container = styled.View`
-  flex: 1;
-  background-color: #fff;
-  align-items: center;
-  justify-content: center;
-`
-
-const CalloutText = styled.Text`
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
-`
 
 const dummyData = [
   {
@@ -81,6 +68,9 @@ export default function Map({ navigation }) {
           latitudeDelta: 0.05,
           longitudeDelta: 0.05,
         }}
+        loadingEnabled
+        loadingBackgroundColor="white"
+        loadingIndicatorColor="black"
       >
         {dummyData.map((data, idx) => {
           return (
@@ -108,6 +98,18 @@ export default function Map({ navigation }) {
     </Container>
   )
 }
+
+const Container = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`
+
+const CalloutText = styled.Text`
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+`
 
 const styles = StyleSheet.create({
   callout: {
