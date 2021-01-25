@@ -2,6 +2,20 @@ import React, { useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import MapView, { Marker, Callout } from 'react-native-maps'
 import { View, StyleSheet, Text } from 'react-native'
+import styled from 'styled-components'
+
+const Container = styled.View`
+  flex: 1;
+  background-color: #fff;
+  align-items: center;
+  justify-content: center;
+`
+
+const CalloutText = styled.Text`
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+`
 
 const dummyData = [
   {
@@ -58,7 +72,7 @@ export default function Map({ navigation }) {
   })
 
   return (
-    <View style={styles.container}>
+    <Container>
       <MapView
         style={StyleSheet.absoluteFillObject}
         initialRegion={{
@@ -83,7 +97,7 @@ export default function Map({ navigation }) {
                 tooltip={true}
                 onPress={() => navigation.navigate('GiftDetail', data)}
               >
-                <Text style={styles.calloutText}>{data.info.title}</Text>
+                <CalloutText>{data.info.title}</CalloutText>
               </Callout>
             </Marker>
           )
@@ -91,26 +105,11 @@ export default function Map({ navigation }) {
       </MapView>
 
       <StatusBar style="auto" />
-    </View>
+    </Container>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  titleText: {
-    fontSize: 24,
-  },
-  paragraph: {
-    marginVertical: 8,
-    lineHeight: 20,
-    padding: 10,
-    fontSize: 20,
-  },
   callout: {
     backgroundColor: 'black',
     padding: 10,
