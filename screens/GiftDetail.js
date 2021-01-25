@@ -4,6 +4,9 @@ import { MaterialIcons } from '@expo/vector-icons'
 import styled from 'styled-components'
 
 export default function GiftDetail({ route, navigation }) {
+  const [clickThumbsUp, setClickThumbsUp] = useState(false)
+  const [clickThumbsDown, setClickThumbsDown] = useState(false)
+
   const {
     imageUrl,
     title,
@@ -27,24 +30,30 @@ export default function GiftDetail({ route, navigation }) {
         <ClickableThumbContainer>
           <CountContainer>
             <MaterialIcons
+              color={clickThumbsUp ? 'black' : 'grey'}
               name="thumb-up"
               size={22}
-              onPress={() =>
+              onPress={() => {
                 navigation.setParams({
                   info: { ...route.params.info, thumbsUp: thumbsUp + 1 },
                 })
-              }
+                setClickThumbsUp(true)
+                setClickThumbsDown(false)
+              }}
             />
           </CountContainer>
           <CountContainer>
             <MaterialIcons
+              color={clickThumbsDown ? 'black' : 'grey'}
               name="thumb-down"
               size={22}
-              onPress={() =>
+              onPress={() => {
                 navigation.setParams({
                   info: { ...route.params.info, thumbsDown: thumbsDown + 1 },
                 })
-              }
+                setClickThumbsDown(true)
+                setClickThumbsUp(false)
+              }}
             />
           </CountContainer>
         </ClickableThumbContainer>
