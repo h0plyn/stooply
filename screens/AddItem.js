@@ -15,6 +15,12 @@ export default function AddForm() {
   const [image, setImage] = useState(null)
   const [imgHash, setImgHash] = useState('')
 
+  let today = new Date()
+  let dd = String(today.getDate()).padStart(2, '0')
+  let mm = String(today.getMonth() + 1).padStart(2, '0')
+  let yyyy = today.getFullYear()
+  today = mm + '/' + dd + '/' + yyyy
+
   useEffect(() => {
     ;(async () => {
       const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
@@ -64,14 +70,15 @@ export default function AddForm() {
         onSubmit={(values, actions) => {
           actions.resetForm()
           values.imageUrl = image
-          values.added = Date.parse(Date.now())
+          values.added = today
+          values.latitude = 'x'
+          values.longitute = 'x'
+          values.thumbsUp = 0
+          values.thumbsDown = 0
+          values.comments = []
 
-          console.log(values)
-          // Take the picture
-          // Confirm the image
-          // On Confirm, redirect to Form Modal
-          // Save the imageUrl to the currentItem
-          // Add the text inputs to the currentItem
+          console.log('Headed to Firestore--->', values)
+
           firebase.firestore().collection('items').doc(imgHash).set(values)
         }}
       >
