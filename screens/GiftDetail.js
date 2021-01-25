@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
+import styled from 'styled-components'
 
 export default function GiftDetail({ route, navigation }) {
   const {
@@ -11,21 +12,20 @@ export default function GiftDetail({ route, navigation }) {
     thumbsUp,
     thumbsDown,
   } = route.params.info
+
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.box}
+    <Container>
+      <ImageBox
         source={{
           uri: imageUrl,
         }}
       />
-      <View style={styles.details}>
-        <Text>{title}</Text>
-        <Text>{description}</Text>
-
-        <Text>Stooped on {added}</Text>
-        <View style={{ flexDirection: 'row', margin: 10 }}>
-          <View style={{ flexDirection: 'row', margin: 5 }}>
+      <ContentView>
+        <Title>{title}</Title>
+        <Description>{description}</Description>
+        <Stooped>Stooped on {added}</Stooped>
+        <ClickableThumbContainer>
+          <CountContainer>
             <MaterialIcons
               name="thumb-up"
               size={22}
@@ -35,8 +35,8 @@ export default function GiftDetail({ route, navigation }) {
                 })
               }
             />
-          </View>
-          <View style={{ flexDirection: 'row', margin: 5 }}>
+          </CountContainer>
+          <CountContainer>
             <MaterialIcons
               name="thumb-down"
               size={22}
@@ -46,54 +46,87 @@ export default function GiftDetail({ route, navigation }) {
                 })
               }
             />
-          </View>
-        </View>
-        <View style={{ flexDirection: 'row', margin: 5 }}>
-          <View style={{ flexDirection: 'row', margin: 5 }}>
-            <Text>{thumbsUp}</Text>
-            <MaterialIcons name="thumb-up" color="#00c87b" size={18} />
-          </View>
-          <View style={{ flexDirection: 'row', margin: 5 }}>
-            <Text>{thumbsDown}</Text>
-            <MaterialIcons name="thumb-down" color="#fd5240" size={18} />
-          </View>
-        </View>
-        <Text>Comments</Text>
-      </View>
-    </View>
+          </CountContainer>
+        </ClickableThumbContainer>
+        <CountContainer>
+          <CountContainer>
+            <Count>{thumbsUp}</Count>
+            <MaterialIcons
+              style={{ paddingTop: 3 }}
+              name="thumb-up"
+              color="#00c87b"
+              size={18}
+            />
+          </CountContainer>
+          <CountContainer style={{ marginLeft: 10 }}>
+            <Count>{thumbsDown}</Count>
+            <MaterialIcons
+              style={{ paddingTop: 3 }}
+              name="thumb-down"
+              color="#fd5240"
+              size={18}
+            />
+          </CountContainer>
+        </CountContainer>
+        <CommentTitle>Comments</CommentTitle>
+      </ContentView>
+    </Container>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  titleText: {
-    fontSize: 24,
-  },
-  box: {
-    backgroundColor: 'tomato',
-    height: '50%',
-    width: '80%',
-    marginHorizontal: 100,
-    marginVertical: 50,
-    borderRadius: 10,
-  },
-  paragraph: {
-    marginVertical: 8,
-    lineHeight: 20,
-    padding: 10,
-    fontSize: 20,
-  },
-  details: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    width: '80%',
-  },
-  Text: {
-    marginVertical: 10,
-  },
-})
+const Container = styled.View`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  background-color: white;
+`
+
+const ImageBox = styled.Image`
+  background-color: black;
+  height: 50%;
+  width: 80%;
+  margin-bottom: 30px;
+  margin-top: 15px;
+  border-radius: 10px;
+`
+
+const ContentView = styled.View`
+  flex: 1;
+  justify-content: flex-start;
+  width: 80%;
+`
+const Title = styled.Text`
+  font-size: 30px;
+  color: black;
+  margin-bottom: 10px;
+`
+const Description = styled.Text`
+  font-size: 18px;
+  color: black;
+  margin-bottom: 8px;
+`
+
+const Stooped = styled.Text`
+  font-size: 15px;
+  color: black;
+  margin-bottom: 8px;
+`
+
+const ClickableThumbContainer = styled.View`
+  flex-direction: row;
+`
+
+const Count = styled.Text`
+  font-size: 18px;
+  margin-right: 6px;
+`
+
+const CountContainer = styled.View`
+  flex-direction: row;
+  margin: 5px;
+`
+const CommentTitle = styled.Text`
+  font-size: 18px;
+  margin-top: 10px;
+`

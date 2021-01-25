@@ -12,7 +12,7 @@ const Container = styled.View`
 `
 
 const LogoText = styled.Text`
-  font-size: 39;
+  font-size: 39px;
   color: black;
 `
 
