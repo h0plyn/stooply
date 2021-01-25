@@ -133,16 +133,16 @@ export default function List({ navigation }) {
 }
 
 const ItemContainer = styled.View`
-  border-width: 1px;
+  border-width: 2px;
   border-radius: 2px;
-  border-color: lightgrey;
   background-color: white;
-  border-bottom-width: 1px;
+  border-top-width: 1px;
+  border-left-width: 1px;
   margin-left: 15px;
   margin-right: 15px;
   margin-top: 10px;
   border-radius: 10px;
-  box-shadow: 1px 1px 1px lightgrey;
+  box-shadow: 1px 1px 5px lightgrey;
 `
 const Title = styled.Text`
   color: black;

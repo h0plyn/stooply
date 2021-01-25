@@ -4,38 +4,6 @@ import MapView, { Marker } from 'react-native-maps'
 import { View, StyleSheet, Text, Button, ScrollView } from 'react-native'
 import styled from 'styled-components'
 
-const Container = styled.View`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-`
-
-const LogoText = styled.Text`
-  font-size: 39px;
-  color: black;
-`
-
-const ButtonView = styled.View`
-  display: flex;
-  flex-direction: row;
-  padding: 25px;
-  justify-content: center;
-  align-items: center;
-`
-
-const MainView = styled.ScrollView`
-  display: flex;
-  border: black;
-  border-width: 5px
-  width: 80%;
-`
-const Footer = styled.View`
-  display: flex;
-  flex-direction: row;
-  padding-bottom: 100px;
-`
-
 export default function Home({ navigation }) {
   return (
     <Container>
@@ -81,20 +49,35 @@ export default function Home({ navigation }) {
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  titleText: {
-    fontSize: 24,
-  },
-  paragraph: {
-    marginVertical: 8,
-    lineHeight: 20,
-    padding: 10,
-    fontSize: 20,
-  },
-})
+const Container = styled.View`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+`
+
+const LogoText = styled.Text`
+  font-size: 39px;
+  color: black;
+`
+
+const ButtonView = styled.View`
+  display: flex;
+  flex-direction: row;
+  padding: 25px;
+  justify-content: center;
+  align-items: center;
+`
+
+const MainView = styled.ScrollView`
+  display: flex;
+  border: black;
+  border-width: 5px;
+  width: 80%;
+  background-color
+`
+const Footer = styled.View`
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 100px;
+`
