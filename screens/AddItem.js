@@ -13,6 +13,7 @@ if (!firebase.apps.length) {
 
 export default function AddForm() {
   const [image, setImage] = useState(null)
+  const [imgHash, setImgHash] = useState('')
 
   useEffect(() => {
     ;(async () => {
@@ -36,6 +37,7 @@ export default function AddForm() {
     if (!result.cancelled) {
       let fileName = result.uri.substring(result.uri.lastIndexOf('/') + 1)
       setImage(result.uri)
+      setImgHash(fileName)
       uploadImage(result.uri, fileName)
         .then(() => Alert.alert('Image Added!'))
         .catch((err) => console.log(err))
@@ -62,12 +64,15 @@ export default function AddForm() {
         onSubmit={(values, actions) => {
           actions.resetForm()
           values.imageUrl = image
+          values.added = Date.parse(Date.now())
+
           console.log(values)
           // Take the picture
           // Confirm the image
           // On Confirm, redirect to Form Modal
           // Save the imageUrl to the currentItem
           // Add the text inputs to the currentItem
+          firebase.firestore().collection('items').doc(imgHash).set(values)
         }}
       >
         {(props) => (
