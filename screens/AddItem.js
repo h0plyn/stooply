@@ -10,7 +10,7 @@ import * as Location from 'expo-location'
 if (!firebase.apps.length) {
   firebase.initializeApp(secrets)
 } else {
-  firebase.app() // if already initialized, use that one
+  firebase.app()
 }
 
 export default function AddForm() {
@@ -81,7 +81,14 @@ export default function AddForm() {
   }
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'white',
+      }}
+    >
       <Formik
         initialValues={{ title: '', description: '' }}
         onSubmit={(values, actions) => {
