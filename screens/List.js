@@ -95,6 +95,8 @@ const db = firebase.firestore()
 // ]
 
 export default function List({ navigation }) {
+  const [testLocal, setTestLocal] = useState(null)
+
   const [items, setItems] = useState([])
   useEffect(() => {
     ;(async () => {
@@ -107,9 +109,19 @@ export default function List({ navigation }) {
       })
       setItems(firestoreItems)
     })()
-  }, [])
 
-  console.log('CURRENT ITEMS', items)
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const latitude = JSON.stringify(position.coords.latitude)
+        const longitude = JSON.stringify(position.coords.longitude)
+        setTestLocal({ latitude, longitude })
+      },
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    )
+  }, [])
+  console.log('TEST LOCAL!', testLocal)
+
+  // console.log('CURRENT ITEMS', items)
 
   return (
     <Container>

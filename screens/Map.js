@@ -82,8 +82,8 @@ export default function Map({ navigation }) {
         <MapView
           style={StyleSheet.absoluteFillObject}
           initialRegion={{
-            latitude: 37.785834,
-            longitude: -122.406417,
+            latitude: 40.6734,
+            longitude: -74.0083,
             latitudeDelta: 0.05,
             longitudeDelta: 0.05,
           }}

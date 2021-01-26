@@ -16,7 +16,7 @@ if (!firebase.apps.length) {
 export default function AddForm() {
   const [image, setImage] = useState(null)
   const [imgHash, setImgHash] = useState('')
-  const [location, setLocation] = useState('')
+  const [location, setLocation] = useState(null)
 
   let today = new Date()
   let dd = String(today.getDate()).padStart(2, '0')
@@ -24,36 +24,56 @@ export default function AddForm() {
   let yyyy = today.getFullYear()
   today = mm + '/' + dd + '/' + yyyy
 
-  useEffect(() => {
-    ;(async () => {
-      const { status } = await Permissions.getAsync(
-        Permissions.MEDIA_LIBRARY,
-        Permissions.LOCATION
-      )
+  // useEffect(() => {
+  //   ;(async () => {
+  //     const { locationStatus } = await Location.requestPermissionsAsync()
 
-      console.log('STATUS--->', status)
-      if (status !== 'granted') {
-        alert(
-          'Sorry, we need camera roll & location permissions to make this work!'
-        )
-      } else {
-        let coords = await Location.getCurrentPositionAsync({
-          enableHighAccuracy: true,
-        }).then((res) => {
-          if (res.coords.latitude && res.coords.longitude) {
-            setLocation({
-              latitude: res.coords.latitude,
-              longitude: res.coords.longitude,
-            })
-          } else {
-            Alert.alert('We really need your location!')
-          }
-        })
-      }
-    })()
+  //     if (locationStatus !== 'granted') {
+  //       alert('Sorry, we need location permissions to make this work!')
+  //     } else {
+  //       let coords = await Location.getCurrentPositionAsync().then((res) => {
+  //         console.log('RES.COORDS--->', res.coords)
+  //         if (res.coords.latitude && res.coords.longitude) {
+  //           setLocation({
+  //             latitude: res.coords.latitude,
+  //             longitude: res.coords.longitude,
+  //           })
+  //         } else {
+  //           Alert.alert('We really need your location!')
+  //         }
+  //       })
+  //     }
+  //   })()
+  // }, [])
+
+  useEffect(() => {
+    getLocation()
+    return () => console.log('done')
   }, [])
 
+  getLocation = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION)
+
+    if (status !== 'granted') {
+      Alert.alert('Need locations access')
+    }
+
+    let location = await Location.getCurrentPositionAsync({})
+    console.log('LOCATION?', location)
+    setLocation({ location })
+    console.log(location)
+  }
+
   const pickImage = async () => {
+    ;(async () => {
+      const {
+        imagePicker,
+      } = await ImagePicker.requestMediaLibraryPermissionsAsync()
+      if (imagePicker !== 'granted') {
+        alert('Sorry, we need camera roll permissions to make this work!')
+      }
+    })()
+
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: false,
@@ -98,16 +118,16 @@ export default function AddForm() {
       <Formik
         initialValues={{ title: '', description: '' }}
         onSubmit={(values, actions) => {
+          console.log('LOCATION AT SEND', location)
+
           actions.resetForm()
           values.imageUrl = image
           values.added = today
-          values.latitude = location.latitude
-          values.longitute = location.longitude
+          values.latitude = location.location.coords.latitude
+          values.longitude = location.location.coords.longitude
           values.thumbsUp = 0
           values.thumbsDown = 0
           values.comments = []
-
-          console.log('LOCATION AT SEND', location)
 
           console.log('Headed to Firestore--->', values)
 
@@ -116,6 +136,12 @@ export default function AddForm() {
       >
         {(props) => (
           <View>
+            {image && (
+              <Image
+                source={{ uri: image }}
+                style={{ width: 200, height: 200 }}
+              />
+            )}
             <TextInput
               style={styles.input}
               placeholder="Title"
@@ -126,7 +152,6 @@ export default function AddForm() {
               onBlur={props.handleBlur('title')}
             />
             <TextInput
-              multiline
               minHeight={60}
               placeholder="Description"
               style={styles.input}
@@ -135,15 +160,13 @@ export default function AddForm() {
               keyboardAppearance="dark"
               placeholderTextColor="grey"
               onBlur={props.handleBlur('rating')}
+              multiline
             />
             <Button onPress={props.handleSubmit} title="Submit Stoop Gift" />
           </View>
         )}
       </Formik>
       <Button title="Pick an image from camera roll" onPress={pickImage} />
-      {image && (
-        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-      )}
     </View>
   )
 }
