@@ -14,7 +14,7 @@ export default function GiftDetail({ route, navigation }) {
     added,
     thumbsUp,
     thumbsDown,
-  } = route.params.info
+  } = route.params
 
   return (
     <Container>
@@ -35,7 +35,8 @@ export default function GiftDetail({ route, navigation }) {
               size={22}
               onPress={() => {
                 navigation.setParams({
-                  info: { ...route.params.info, thumbsUp: thumbsUp + 1 },
+                  ...route.params,
+                  thumbsUp: parseInt(thumbsUp) + 1,
                 })
                 setClickThumbsUp(true)
                 setClickThumbsDown(false)
@@ -49,7 +50,8 @@ export default function GiftDetail({ route, navigation }) {
               size={22}
               onPress={() => {
                 navigation.setParams({
-                  info: { ...route.params.info, thumbsDown: thumbsDown + 1 },
+                  ...route.params,
+                  thumbsDown: parseInt(thumbsDown) + 1,
                 })
                 setClickThumbsDown(true)
                 setClickThumbsUp(false)

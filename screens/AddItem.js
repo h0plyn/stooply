@@ -30,6 +30,8 @@ export default function AddForm() {
         Permissions.MEDIA_LIBRARY,
         Permissions.LOCATION
       )
+
+      console.log('STATUS--->', status)
       if (status !== 'granted') {
         alert(
           'Sorry, we need camera roll & location permissions to make this work!'
@@ -37,12 +39,16 @@ export default function AddForm() {
       } else {
         let coords = await Location.getCurrentPositionAsync({
           enableHighAccuracy: true,
-        }).then((res) =>
-          setLocation({
-            latitude: res.coords.latitude,
-            longitude: res.coords.longitude,
-          })
-        )
+        }).then((res) => {
+          if (res.coords.latitude && res.coords.longitude) {
+            setLocation({
+              latitude: res.coords.latitude,
+              longitude: res.coords.longitude,
+            })
+          } else {
+            Alert.alert('We really need your location!')
+          }
+        })
       }
     })()
   }, [])
