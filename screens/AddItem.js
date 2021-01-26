@@ -1,11 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import { View, TextInput, StyleSheet, Button, Image, Alert } from 'react-native'
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Button,
+  Image,
+  Alert,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native'
 import { Formik } from 'formik'
 import * as ImagePicker from 'expo-image-picker'
 import * as firebase from 'firebase'
 import secrets from '../secrets'
 import * as Permissions from 'expo-permissions'
 import * as Location from 'expo-location'
+import StoopButton from '../shared/Button'
+import styled from 'styled-components'
 
 if (!firebase.apps.length) {
   firebase.initializeApp(secrets)
@@ -85,80 +96,77 @@ export default function AddForm() {
   }
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
-      }}
-    >
-      <Formik
-        initialValues={{ title: '', description: '' }}
-        onSubmit={(values, actions) => {
-          console.log('LOCATION AT SEND', location)
-
-          actions.resetForm()
-          values.imageUrl = image
-          values.added = today
-          values.latitude = location.location.coords.latitude
-          values.longitude = location.location.coords.longitude
-          values.thumbsUp = 0
-          values.thumbsDown = 0
-          values.comments = []
-
-          console.log('Headed to Firestore--->', values)
-
-          firebase.firestore().collection('items').doc(imgHash).set(values)
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'white',
         }}
       >
-        {(props) => (
-          <View>
-            {image && (
-              <Image
-                source={{ uri: image }}
-                style={{ width: 200, height: 200 }}
+        <Formik
+          initialValues={{ title: '', description: '' }}
+          onSubmit={(values, actions) => {
+            console.log('LOCATION AT SEND', location)
+
+            actions.resetForm()
+            values.imageUrl = image
+            values.added = today
+            values.latitude = location.location.coords.latitude
+            values.longitude = location.location.coords.longitude
+            values.thumbsUp = 0
+            values.thumbsDown = 0
+            values.comments = []
+
+            console.log('Headed to Firestore--->', values)
+
+            firebase.firestore().collection('items').doc(imgHash).set(values)
+          }}
+        >
+          {(props) => (
+            <View>
+              {image && (
+                <Image
+                  source={{ uri: image }}
+                  style={{ width: 200, height: 200 }}
+                />
+              )}
+              <InputBox
+                placeholder="Title"
+                onChangeText={props.handleChange('title')}
+                value={props.values.title}
+                keyboardAppearance="dark"
+                placeholderTextColor="grey"
+                onBlur={props.handleBlur('title')}
               />
-            )}
-            <TextInput
-              style={styles.input}
-              placeholder="Title"
-              onChangeText={props.handleChange('title')}
-              value={props.values.title}
-              keyboardAppearance="dark"
-              placeholderTextColor="grey"
-              onBlur={props.handleBlur('title')}
-            />
-            <TextInput
-              minHeight={60}
-              placeholder="Description"
-              style={styles.input}
-              onChangeText={props.handleChange('description')}
-              value={props.values.description}
-              keyboardAppearance="dark"
-              placeholderTextColor="grey"
-              onBlur={props.handleBlur('rating')}
-              multiline
-            />
-            <Button onPress={props.handleSubmit} title="Submit Stoop Gift" />
-          </View>
-        )}
-      </Formik>
-      <Button title="Pick an image from camera roll" onPress={pickImage} />
-    </View>
+              <InputBox
+                placeholder="Description"
+                onChangeText={props.handleChange('description')}
+                value={props.values.description}
+                keyboardAppearance="dark"
+                placeholderTextColor="grey"
+                onBlur={props.handleBlur('rating')}
+              />
+              <StoopButton onPress={props.handleSubmit} text="Submit" />
+            </View>
+          )}
+        </Formik>
+        <StoopButton onPress={pickImage} text="Camera Roll" />
+        {/* <Button title="Pick an image from camera roll" onPress={pickImage} /> */}
+      </View>
+    </TouchableWithoutFeedback>
   )
 }
 
-const styles = StyleSheet.create({
-  input: {
-    borderWidth: 1,
-    borderColor: '#433983',
-    padding: 10,
-    fontSize: 18,
-    borderRadius: 6,
-    backgroundColor: 'black',
-    color: 'white',
-    width: 300,
-    margin: 9,
-  },
-})
+const InputBox = styled.TextInput`
+  border-width: 1px;
+  border-color: grey;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 6px;
+  background-color: black;
+  color: white;
+  width: 300px;
+  margin: 9px;
+`
