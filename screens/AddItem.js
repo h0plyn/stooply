@@ -24,28 +24,6 @@ export default function AddForm() {
   let yyyy = today.getFullYear()
   today = mm + '/' + dd + '/' + yyyy
 
-  // useEffect(() => {
-  //   ;(async () => {
-  //     const { locationStatus } = await Location.requestPermissionsAsync()
-
-  //     if (locationStatus !== 'granted') {
-  //       alert('Sorry, we need location permissions to make this work!')
-  //     } else {
-  //       let coords = await Location.getCurrentPositionAsync().then((res) => {
-  //         console.log('RES.COORDS--->', res.coords)
-  //         if (res.coords.latitude && res.coords.longitude) {
-  //           setLocation({
-  //             latitude: res.coords.latitude,
-  //             longitude: res.coords.longitude,
-  //           })
-  //         } else {
-  //           Alert.alert('We really need your location!')
-  //         }
-  //       })
-  //     }
-  //   })()
-  // }, [])
-
   useEffect(() => {
     getLocation()
     return () => console.log('done')
