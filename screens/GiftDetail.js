@@ -19,7 +19,13 @@ export default function GiftDetail({ route, navigation }) {
   } = route.params
 
   return (
-    <Container>
+    <Container
+      contentContainerStyle={{
+        flexGrow: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       <ImageBox
         source={{
           uri: imageUrl,
@@ -86,11 +92,20 @@ export default function GiftDetail({ route, navigation }) {
           {comments &&
             comments.length > 0 &&
             comments.map((comment) => {
+              console.log(comment)
               return (
                 <TouchableOpacity key={comment.name}>
                   <CommentContainer>
-                    <UserName>{comment.name}:</UserName>
-                    <Comment>{comment.comment}</Comment>
+                    <AvatarBar>
+                      <Image
+                        source={{ uri: comment.avatar, width: 40, height: 40 }}
+                        style={{ borderRadius: 50 }}
+                      />
+                      <UserName>{comment.name}</UserName>
+                    </AvatarBar>
+                    <View>
+                      <CommentContent>{comment.comment}</CommentContent>
+                    </View>
                   </CommentContainer>
                 </TouchableOpacity>
               )
@@ -101,10 +116,9 @@ export default function GiftDetail({ route, navigation }) {
   )
 }
 
-const Container = styled.View`
+const Container = styled.ScrollView`
   display: flex;
-  justify-content: center;
-  align-items: center;
+
   flex: 1;
   background-color: white;
 `
@@ -153,6 +167,12 @@ const CountContainer = styled.View`
   flex-direction: row;
   margin: 5px;
 `
+
+const AvatarBar = styled.View`
+  flex-direction: row;
+  align-items: flex-end;
+  margin-bottom: 3px;
+`
 const CommentTitle = styled.Text`
   font-size: 18px;
   margin-top: 10px;
@@ -160,12 +180,13 @@ const CommentTitle = styled.Text`
 `
 const CommentContainer = styled.View`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  height: 20px;
 `
 const UserName = styled.Text`
   font-weight: 600;
 `
 
-const Comment = styled.Text`
+const CommentContent = styled.Text`
   margin-left: 8px;
 `
