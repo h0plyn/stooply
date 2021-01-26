@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 import styled from 'styled-components'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 export default function GiftDetail({ route, navigation }) {
   const [clickThumbsUp, setClickThumbsUp] = useState(false)
@@ -14,6 +15,7 @@ export default function GiftDetail({ route, navigation }) {
     added,
     thumbsUp,
     thumbsDown,
+    comments,
   } = route.params
 
   return (
@@ -80,6 +82,20 @@ export default function GiftDetail({ route, navigation }) {
           </CountContainer>
         </CountContainer>
         <CommentTitle>Comments</CommentTitle>
+        <View>
+          {comments &&
+            comments.length > 0 &&
+            comments.map((comment) => {
+              return (
+                <TouchableOpacity key={comment.name}>
+                  <CommentContainer>
+                    <UserName>{comment.name}:</UserName>
+                    <Comment>{comment.comment}</Comment>
+                  </CommentContainer>
+                </TouchableOpacity>
+              )
+            })}
+        </View>
       </ContentView>
     </Container>
   )
@@ -140,4 +156,16 @@ const CountContainer = styled.View`
 const CommentTitle = styled.Text`
   font-size: 18px;
   margin-top: 10px;
+  margin-bottom: 10px;
+`
+const CommentContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+`
+const UserName = styled.Text`
+  font-weight: 600;
+`
+
+const Comment = styled.Text`
+  margin-left: 8px;
 `

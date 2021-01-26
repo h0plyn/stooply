@@ -62,14 +62,14 @@ export default function List({ navigation }) {
                         color="#00c87b"
                         size={16}
                       />
-                      <Count>{item.thumbsDown}</Count>
+                      <Count>{item.thumbsUp}</Count>
                       <MaterialIcons
                         style={{ marginLeft: 6 }}
                         name="thumb-down"
                         color="#fd5240"
                         size={16}
                       />
-                      <Count>{item.thumbsUp}</Count>
+                      <Count>{item.thumbsDown}</Count>
                     </ThumbContainer>
                   </InfoContainer>
                   {/* End ListCard */}
