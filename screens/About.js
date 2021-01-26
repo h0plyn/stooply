@@ -1,10 +1,12 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import styled from 'styled-components'
+import about from '../assets/about.png'
 
 export default function About() {
   return (
     <Container>
+      <Image source={about} style={{ marginLeft: 68 }} />
       <Title style={{ alignSelf: 'flex-start' }}>Origin Story</Title>
       <FeatText>
         The concept for Stooply came about while walking around the Park Slope

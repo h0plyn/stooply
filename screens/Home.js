@@ -9,6 +9,7 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  Touchable,
 } from 'react-native'
 import styled from 'styled-components'
 import logo from '../assets/logo.png'
@@ -28,25 +29,32 @@ export default function Home({ navigation }) {
         <Logo source={logo} />
         <LogoText>stooply</LogoText>
         <ButtonView>
-          <MaterialCommunityIcons
-            onPress={() => navigation.navigate('Map')}
-            name="map-search"
-            size={50}
-            style={{ margin: 10 }}
-          />
-
-          <MaterialIcons
-            onPress={() => navigation.navigate('List')}
-            name="view-list"
-            size={50}
-            style={{ margin: 10 }}
-          />
-          <MaterialIcons
-            onPress={() => navigation.navigate('AddItem')}
-            name="add-circle"
-            size={50}
-            style={{ margin: 10 }}
-          />
+          <TouchableOpacity style={{ flexDirection: 'row' }}>
+            <View>
+              <MaterialCommunityIcons
+                onPress={() => navigation.navigate('Map')}
+                name="map-search"
+                size={50}
+                style={{ margin: 10 }}
+              />
+            </View>
+            <View>
+              <MaterialIcons
+                onPress={() => navigation.navigate('List')}
+                name="view-list"
+                size={50}
+                style={{ margin: 10 }}
+              />
+            </View>
+            <View>
+              <MaterialIcons
+                onPress={() => navigation.navigate('AddItem')}
+                name="add-circle"
+                size={50}
+                style={{ margin: 10 }}
+              />
+            </View>
+          </TouchableOpacity>
         </ButtonView>
       </MainView>
       <Footer>

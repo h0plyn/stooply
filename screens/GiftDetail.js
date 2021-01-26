@@ -181,12 +181,13 @@ const CommentTitle = styled.Text`
 const CommentContainer = styled.View`
   display: flex;
   flex-direction: column;
-  height: 20px;
+  height: 70px;
 `
 const UserName = styled.Text`
   font-weight: 600;
+  margin-left: 5px;
 `
 
 const CommentContent = styled.Text`
-  margin-left: 8px;
+  margin-top: 3px;
 `
