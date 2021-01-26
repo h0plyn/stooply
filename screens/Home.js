@@ -5,6 +5,7 @@ import { View, StyleSheet, Text, Button, ScrollView, Image } from 'react-native'
 import styled from 'styled-components'
 import logo from '../assets/logo.png'
 import { MaterialIcons } from '@expo/vector-icons'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 export default function Home({ navigation }) {
   return (
@@ -19,15 +20,24 @@ export default function Home({ navigation }) {
         <Logo source={logo} />
         <LogoText>stooply</LogoText>
         <ButtonView>
-          <Button
-            title="Map"
-            color="black"
+          <MaterialCommunityIcons
             onPress={() => navigation.navigate('Map')}
+            name="map-search"
+            size={50}
+            style={{ margin: 10 }}
           />
-          <Button
-            color="black"
-            title="List"
+
+          <MaterialIcons
             onPress={() => navigation.navigate('List')}
+            name="view-list"
+            size={50}
+            style={{ margin: 10 }}
+          />
+          <MaterialIcons
+            onPress={() => navigation.navigate('AddItem')}
+            name="add-circle"
+            size={50}
+            style={{ margin: 10 }}
           />
         </ButtonView>
       </MainView>
@@ -37,17 +47,6 @@ export default function Home({ navigation }) {
           color="black"
           onPress={() => navigation.navigate('About')}
         />
-        <Button
-          title="Camera"
-          color="black"
-          onPress={() => navigation.navigate('CameraScreen')}
-        />
-        <Button
-          title="Add Item"
-          color="black"
-          onPress={() => navigation.navigate('AddItem')}
-        ></Button>
-        <MaterialIcons name="add-circle" size={50} />
       </Footer>
     </Container>
   )
@@ -87,6 +86,6 @@ const MainView = styled.ScrollView`
 const Footer = styled.View`
   display: flex;
   flex-direction: row;
-  padding-bottom: 100px;
+  padding-bottom: 70px;
   margin-top: 10px;
 `
