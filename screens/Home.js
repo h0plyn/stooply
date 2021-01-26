@@ -1,8 +1,10 @@
 import React from 'react'
 import { StatusBar } from 'expo-status-bar'
 import MapView, { Marker } from 'react-native-maps'
-import { View, StyleSheet, Text, Button, ScrollView } from 'react-native'
+import { View, StyleSheet, Text, Button, ScrollView, Image } from 'react-native'
 import styled from 'styled-components'
+import logo from '../assets/logo.png'
+import { MaterialIcons } from '@expo/vector-icons'
 
 export default function Home({ navigation }) {
   return (
@@ -14,7 +16,8 @@ export default function Home({ navigation }) {
           alignItems: 'center',
         }}
       >
-        <LogoText>Stooply</LogoText>
+        <Logo source={logo} />
+        <LogoText>stooply</LogoText>
         <ButtonView>
           <Button
             title="Map"
@@ -43,7 +46,8 @@ export default function Home({ navigation }) {
           title="Add Item"
           color="black"
           onPress={() => navigation.navigate('AddItem')}
-        />
+        ></Button>
+        <MaterialIcons name="add-circle" size={50} />
       </Footer>
     </Container>
   )
@@ -54,6 +58,12 @@ const Container = styled.View`
   justify-content: center;
   align-items: center;
   flex: 1;
+  background-color: white;
+`
+
+const Logo = styled.Image`
+  width: 250px;
+  height: 200px;
 `
 
 const LogoText = styled.Text`
@@ -71,13 +81,12 @@ const ButtonView = styled.View`
 
 const MainView = styled.ScrollView`
   display: flex;
-  border: black;
-  border-width: 5px;
   width: 80%;
-  border-radius: 10px
+  border-radius: 10px;
 `
 const Footer = styled.View`
   display: flex;
   flex-direction: row;
   padding-bottom: 100px;
+  margin-top: 10px;
 `

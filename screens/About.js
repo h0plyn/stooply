@@ -19,8 +19,10 @@ const Container = styled.View`
   justify-content: center;
   align-items: center;
   flex: 1;
-  padding: 10px;
-  margin-bottom: 150px;
+  height: 100%;
+  padding: 30px;
+  padding-bottom: 150px;
+  background-color: white;
 `
 
 const Title = styled.Text`
