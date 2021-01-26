@@ -118,7 +118,6 @@ export default function GiftDetail({ route, navigation }) {
 
 const Container = styled.ScrollView`
   display: flex;
-
   flex: 1;
   background-color: white;
 `

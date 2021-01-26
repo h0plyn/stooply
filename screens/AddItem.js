@@ -8,6 +8,7 @@ import {
   Alert,
   TouchableWithoutFeedback,
   Keyboard,
+  Text,
 } from 'react-native'
 import { Formik } from 'formik'
 import * as ImagePicker from 'expo-image-picker'
@@ -17,6 +18,7 @@ import * as Permissions from 'expo-permissions'
 import * as Location from 'expo-location'
 import StoopButton from '../shared/Button'
 import styled from 'styled-components'
+import * as yup from 'yup'
 
 if (!firebase.apps.length) {
   firebase.initializeApp(secrets)
@@ -24,10 +26,16 @@ if (!firebase.apps.length) {
   firebase.app()
 }
 
-export default function AddForm() {
+const reviewSchema = yup.object({
+  title: yup.string().required().min(4),
+  description: yup.string().required().min(4),
+})
+
+export default function AddForm({ navigation }) {
   const [image, setImage] = useState(null)
   const [imgHash, setImgHash] = useState('')
   const [location, setLocation] = useState(null)
+  const [gallery, setGallery] = useState(false)
 
   let today = new Date()
   let dd = String(today.getDate()).padStart(2, '0')
@@ -62,7 +70,7 @@ export default function AddForm() {
         alert('Sorry, we need camera roll permissions to make this work!')
       }
     })()
-
+    setGallery(true)
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: false,
@@ -77,7 +85,10 @@ export default function AddForm() {
       setImage(result.uri)
       setImgHash(fileName)
       uploadImage(result.uri, fileName)
-        .then(() => Alert.alert('Image Added!'))
+        .then(() => {
+          Alert.alert('Image Added!')
+          setGallery(false)
+        })
         .catch((err) => console.log(err))
     }
   }
@@ -107,6 +118,7 @@ export default function AddForm() {
       >
         <Formik
           initialValues={{ title: '', description: '' }}
+          validationSchema={reviewSchema}
           onSubmit={(values, actions) => {
             console.log('LOCATION AT SEND', location)
 
@@ -122,16 +134,31 @@ export default function AddForm() {
             console.log('Headed to Firestore--->', values)
 
             firebase.firestore().collection('items').doc(imgHash).set(values)
+            navigation.navigate('Map')
           }}
         >
           {(props) => (
-            <View>
-              {image && (
-                <Image
-                  source={{ uri: image }}
-                  style={{ width: 200, height: 200 }}
-                />
-              )}
+            <View
+              style={{
+                alignItems: 'center',
+              }}
+            >
+              <View>
+                {image && (
+                  <ImageBox resizeMode="cover" source={{ uri: image }} />
+                )}
+                {image && gallery && (
+                  <Text
+                    style={{
+                      color: 'red',
+                      fontWeight: 'bold',
+                      alignSelf: 'center',
+                    }}
+                  >
+                    Please wait until image is uploaded
+                  </Text>
+                )}
+              </View>
               <InputBox
                 placeholder="Title"
                 onChangeText={props.handleChange('title')}
@@ -140,14 +167,19 @@ export default function AddForm() {
                 placeholderTextColor="grey"
                 onBlur={props.handleBlur('title')}
               />
+              <Text>{props.touched.title && props.errors.title}</Text>
               <InputBox
                 placeholder="Description"
                 onChangeText={props.handleChange('description')}
                 value={props.values.description}
                 keyboardAppearance="dark"
                 placeholderTextColor="grey"
-                onBlur={props.handleBlur('rating')}
+                onBlur={props.handleBlur('description')}
               />
+              <Text>
+                {props.touched.description && props.errors.description}
+              </Text>
+
               <StoopButton onPress={props.handleSubmit} text="Submit" />
             </View>
           )}
@@ -169,4 +201,13 @@ const InputBox = styled.TextInput`
   color: white;
   width: 300px;
   margin: 9px;
+`
+
+const ImageBox = styled.Image`
+  background-color: white;
+  width: 300px;
+  height: 400px;
+  margin-top: 15px;
+  border-radius: 10px;
+  align-items: center;
 `
