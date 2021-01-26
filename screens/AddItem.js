@@ -4,6 +4,8 @@ import { Formik } from 'formik'
 import * as ImagePicker from 'expo-image-picker'
 import * as firebase from 'firebase'
 import secrets from '../secrets'
+import * as Permissions from 'expo-permissions'
+import * as Location from 'expo-location'
 
 if (!firebase.apps.length) {
   firebase.initializeApp(secrets)
@@ -14,6 +16,7 @@ if (!firebase.apps.length) {
 export default function AddForm() {
   const [image, setImage] = useState(null)
   const [imgHash, setImgHash] = useState('')
+  const [location, setLocation] = useState('')
 
   let today = new Date()
   let dd = String(today.getDate()).padStart(2, '0')
@@ -23,9 +26,23 @@ export default function AddForm() {
 
   useEffect(() => {
     ;(async () => {
-      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
+      const { status } = await Permissions.getAsync(
+        Permissions.MEDIA_LIBRARY,
+        Permissions.LOCATION
+      )
       if (status !== 'granted') {
-        alert('Sorry, we need camera roll permissions to make this work!')
+        alert(
+          'Sorry, we need camera roll & location permissions to make this work!'
+        )
+      } else {
+        let coords = await Location.getCurrentPositionAsync({
+          enableHighAccuracy: true,
+        }).then((res) =>
+          setLocation({
+            latitude: res.coords.latitude,
+            longitude: res.coords.longitude,
+          })
+        )
       }
     })()
   }, [])
@@ -71,11 +88,13 @@ export default function AddForm() {
           actions.resetForm()
           values.imageUrl = image
           values.added = today
-          values.latitude = 'x'
-          values.longitute = 'x'
+          values.latitude = location.latitude
+          values.longitute = location.longitude
           values.thumbsUp = 0
           values.thumbsDown = 0
           values.comments = []
+
+          console.log('LOCATION AT SEND', location)
 
           console.log('Headed to Firestore--->', values)
 
