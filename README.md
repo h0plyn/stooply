@@ -48,7 +48,7 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]]
+![[stooply screenshot]](https://user-images.githubusercontent.com/36062933/109432273-6d627d00-79d8-11eb-9277-b6cd94bede1c.png)
 
 ### Built With
 
@@ -139,4 +139,3 @@ Project Link: [https://github.com/h0plyn/stooply](https://github.com/h0plyn/stoo
 [license-url]: https://github.com/h0plyn/stooply/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/rickyrhodes
-[product-screenshot]: https://user-images.githubusercontent.com/36062933/109432273-6d627d00-79d8-11eb-9277-b6cd94bede1c.png
