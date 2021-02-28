@@ -6,7 +6,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/h0plyn/stooply">
-    <img src="https://user-images.githubusercontent.com/36062933/109431886-ad286500-79d6-11eb-8c2d-420740c2eb25.png" alt="Logo" width="80" height="80">
+    <img src="https://user-images.githubusercontent.com/36062933/109433463-69395e00-79de-11eb-810a-4d2657da8844.png" alt="Logo" width="160" height="160">
   </a>
 
   <h3 align="center">stooply</h3>
