@@ -1,36 +1,35 @@
-import React, { useState, useEffect } from 'react'
-import { StatusBar } from 'expo-status-bar'
-import MapView, { Marker, Callout } from 'react-native-maps'
-import { View, StyleSheet, Text, Modal } from 'react-native'
-import styled from 'styled-components'
+import React, { useState, useEffect } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import MapView, { Marker, Callout } from 'react-native-maps';
+import { View, StyleSheet, Text, Modal } from 'react-native';
+import styled from 'styled-components';
 
-import * as firebase from 'firebase'
-import secrets from '../secrets'
+import * as firebase from 'firebase';
+import secrets from '../secrets';
 
 if (!firebase.apps.length) {
-  firebase.initializeApp(secrets)
+  firebase.initializeApp(secrets);
 } else {
-  firebase.app()
+  firebase.app();
 }
 
-const db = firebase.firestore()
+const db = firebase.firestore();
 
 export default function Map({ navigation }) {
-  const [items, setItems] = useState([])
-  useEffect(() => {
-    ;(async () => {
-      const firestoreItems = []
-      const itemsRef = db.collection('items')
-      const snapshot = await itemsRef.get()
-      snapshot.forEach((doc) => {
-        // console.log(doc.id, '=>', doc.data())
-        firestoreItems.push(doc.data())
-      })
-      setItems(firestoreItems)
-    })()
-  }, [])
+  const [items, setItems] = useState([]);
 
-  console.log(items)
+  useEffect(() => {
+    (async () => {
+      const firestoreItems = [];
+      const itemsRef = db.collection('items');
+      const snapshot = await itemsRef.get();
+      snapshot.forEach((doc) => {
+        firestoreItems.push(doc.data());
+      });
+      setItems(firestoreItems);
+    })();
+  }, []);
+
   return (
     <Container>
       {items && items.length > 0 && (
@@ -64,27 +63,27 @@ export default function Map({ navigation }) {
                   <CalloutText>{data.title}</CalloutText>
                 </Callout>
               </Marker>
-            )
+            );
           })}
         </MapView>
       )}
 
       <StatusBar style="auto" />
     </Container>
-  )
+  );
 }
 
 const Container = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
-`
+`;
 
 const CalloutText = styled.Text`
   color: white;
   font-weight: bold;
   font-size: 16px;
-`
+`;
 
 const styles = StyleSheet.create({
   callout: {
@@ -95,4 +94,4 @@ const styles = StyleSheet.create({
   calloutText: {
     color: 'white',
   },
-})
+});

@@ -1,25 +1,25 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { Text, View, TouchableOpacity } from 'react-native'
-import { Camera } from 'expo-camera'
+import React, { useState, useEffect, useRef } from 'react';
+import { Text, View, TouchableOpacity } from 'react-native';
+import { Camera } from 'expo-camera';
 
 export default function CameraScreen({ navigation }) {
-  const [hasPermission, setHasPermission] = useState(null)
-  const [cameraRef, setCameraRef] = useState(null)
-  const [type, setType] = useState(Camera.Constants.Type.back)
+  const [hasPermission, setHasPermission] = useState(null);
+  const [cameraRef, setCameraRef] = useState(null);
+  const [type, setType] = useState(Camera.Constants.Type.back);
 
   useEffect(() => {
-    ;(async () => {
-      const { status } = await Camera.requestPermissionsAsync()
-      setHasPermission(status === `granted`)
-    })()
-  }, [])
+    (async () => {
+      const { status } = await Camera.requestPermissionsAsync();
+      setHasPermission(status === `granted`);
+    })();
+  }, []);
 
   if (hasPermission === null) {
-    return <View />
+    return <View />;
   }
 
   if (hasPermission == false) {
-    return <View>Stooply needs camera access to add a gift.</View>
+    return <View>Stooply needs camera access to add a gift.</View>;
   }
 
   return (
@@ -30,7 +30,7 @@ export default function CameraScreen({ navigation }) {
         }}
         type={type}
         ref={(ref) => {
-          setCameraRef(ref)
+          setCameraRef(ref);
         }}
         autoFocus="on"
       >
@@ -48,7 +48,7 @@ export default function CameraScreen({ navigation }) {
                 type === Camera.Constants.Type.back
                   ? Camera.Constants.Type.front
                   : Camera.Constants.Type.back
-              )
+              );
             }}
           >
             <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
@@ -59,9 +59,8 @@ export default function CameraScreen({ navigation }) {
             style={{ alignSelf: 'center' }}
             onPress={async () => {
               if (cameraRef) {
-                let photo = await cameraRef.takePictureAsync('photo')
-                console.log('photo', photo)
-                navigation.navigate('Image', { photo: photo })
+                let photo = await cameraRef.takePictureAsync('photo');
+                navigation.navigate('Image', { photo: photo });
               }
             }}
           >
@@ -93,5 +92,5 @@ export default function CameraScreen({ navigation }) {
         </View>
       </Camera>
     </View>
-  )
+  );
 }

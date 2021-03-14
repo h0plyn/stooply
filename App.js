@@ -1,17 +1,17 @@
-import React, { useState } from 'react'
-import { StyleSheet, View, Text, Button } from 'react-native'
-import { createStackNavigator } from '@react-navigation/stack'
-import { NavigationContainer } from '@react-navigation/native'
-import Home from './screens/Home'
-import Map from './screens/Map'
-import List from './screens/List'
-import GiftDetail from './screens/GiftDetail'
-import About from './screens/About'
-import CameraScreen from './screens/CameraScreen'
-import ImageScreen from './screens/ImageScreen'
-import AddItem from './screens/AddItem'
+import React, { useState } from 'react';
+import { StyleSheet, View, Text, Button } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import Home from './screens/Home';
+import Map from './screens/Map';
+import List from './screens/List';
+import GiftDetail from './screens/GiftDetail';
+import About from './screens/About';
+import CameraScreen from './screens/CameraScreen';
+import ImageScreen from './screens/ImageScreen';
+import AddItem from './screens/AddItem';
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
 
 function HomeStack() {
   return (
@@ -25,7 +25,7 @@ function HomeStack() {
       <Stack.Screen name="Image" component={ImageScreen} />
       <Stack.Screen name="AddItem" component={AddItem} />
     </Stack.Navigator>
-  )
+  );
 }
 
 export default function App() {
@@ -75,13 +75,13 @@ export default function App() {
         comments: [],
       },
     },
-  ])
+  ]);
 
   return (
     <NavigationContainer>
       <HomeStack />
     </NavigationContainer>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -100,4 +100,4 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 20,
   },
-})
+});

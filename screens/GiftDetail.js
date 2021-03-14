@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
-import { MaterialIcons } from '@expo/vector-icons'
-import styled from 'styled-components'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import styled from 'styled-components';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function GiftDetail({ route, navigation }) {
-  const [clickThumbsUp, setClickThumbsUp] = useState(false)
-  const [clickThumbsDown, setClickThumbsDown] = useState(false)
+  const [clickThumbsUp, setClickThumbsUp] = useState(false);
+  const [clickThumbsDown, setClickThumbsDown] = useState(false);
 
   const {
     imageUrl,
@@ -16,7 +16,7 @@ export default function GiftDetail({ route, navigation }) {
     thumbsUp,
     thumbsDown,
     comments,
-  } = route.params
+  } = route.params;
 
   return (
     <Container
@@ -45,9 +45,9 @@ export default function GiftDetail({ route, navigation }) {
                 navigation.setParams({
                   ...route.params,
                   thumbsUp: parseInt(thumbsUp) + 1,
-                })
-                setClickThumbsUp(true)
-                setClickThumbsDown(false)
+                });
+                setClickThumbsUp(true);
+                setClickThumbsDown(false);
               }}
             />
           </CountContainer>
@@ -60,9 +60,9 @@ export default function GiftDetail({ route, navigation }) {
                 navigation.setParams({
                   ...route.params,
                   thumbsDown: parseInt(thumbsDown) + 1,
-                })
-                setClickThumbsDown(true)
-                setClickThumbsUp(false)
+                });
+                setClickThumbsDown(true);
+                setClickThumbsUp(false);
               }}
             />
           </CountContainer>
@@ -92,7 +92,6 @@ export default function GiftDetail({ route, navigation }) {
           {comments &&
             comments.length > 0 &&
             comments.map((comment) => {
-              console.log(comment)
               return (
                 <TouchableOpacity key={comment.name}>
                   <CommentContainer>
@@ -108,19 +107,19 @@ export default function GiftDetail({ route, navigation }) {
                     </View>
                   </CommentContainer>
                 </TouchableOpacity>
-              )
+              );
             })}
         </View>
       </ContentView>
     </Container>
-  )
+  );
 }
 
 const Container = styled.ScrollView`
   display: flex;
   flex: 1;
   background-color: white;
-`
+`;
 
 const ImageBox = styled.Image`
   background-color: black;
@@ -129,64 +128,64 @@ const ImageBox = styled.Image`
   margin-bottom: 30px;
   margin-top: 15px;
   border-radius: 10px;
-`
+`;
 
 const ContentView = styled.View`
   flex: 1;
   justify-content: flex-start;
   width: 80%;
-`
+`;
 const Title = styled.Text`
   font-size: 30px;
   color: black;
   margin-bottom: 10px;
-`
+`;
 const Description = styled.Text`
   font-size: 18px;
   color: black;
   margin-bottom: 8px;
-`
+`;
 
 const Stooped = styled.Text`
   font-size: 15px;
   color: black;
   margin-bottom: 8px;
-`
+`;
 
 const ClickableThumbContainer = styled.View`
   flex-direction: row;
-`
+`;
 
 const Count = styled.Text`
   font-size: 18px;
   margin-right: 6px;
-`
+`;
 
 const CountContainer = styled.View`
   flex-direction: row;
   margin: 5px;
-`
+`;
 
 const AvatarBar = styled.View`
   flex-direction: row;
   align-items: flex-end;
   margin-bottom: 3px;
-`
+`;
 const CommentTitle = styled.Text`
   font-size: 18px;
   margin-top: 10px;
   margin-bottom: 10px;
-`
+`;
 const CommentContainer = styled.View`
   display: flex;
   flex-direction: column;
   height: 70px;
-`
+`;
 const UserName = styled.Text`
   font-weight: 600;
   margin-left: 5px;
-`
+`;
 
 const CommentContent = styled.Text`
   margin-top: 3px;
-`
+`;

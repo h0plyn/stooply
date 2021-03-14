@@ -21,7 +21,6 @@ export default function List({ navigation }) {
       const itemsRef = db.collection('items')
       const snapshot = await itemsRef.get()
       snapshot.forEach((doc) => {
-        // console.log(doc.id, '=>', doc.data())
         firestoreItems.push(doc.data())
       })
       setItems(firestoreItems)
