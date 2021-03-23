@@ -44,11 +44,6 @@ export default function ListCard({ navigation, item }) {
   );
 }
 
-const Container = styled.View`
-  flex: 1;
-  background-color: white;
-`;
-
 const ItemContainer = styled.View`
   border-width: 2px;
   border-radius: 2px;
