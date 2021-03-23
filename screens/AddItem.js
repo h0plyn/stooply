@@ -8,19 +8,12 @@ import {
 } from 'react-native';
 import { Formik } from 'formik';
 import * as ImagePicker from 'expo-image-picker';
-import * as firebase from 'firebase';
-import secrets from '../secrets';
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
 import StoopButton from '../shared/Button';
 import styled from 'styled-components';
 import * as yup from 'yup';
-
-if (!firebase.apps.length) {
-  firebase.initializeApp(secrets);
-} else {
-  firebase.app();
-}
+import { storage, db } from '../firebase';
 
 const reviewSchema = yup.object({
   title: yup.string().required().min(4),
@@ -93,7 +86,7 @@ export default function AddForm({ navigation }) {
     const response = await fetch(uri);
     const blob = await response.blob();
 
-    let ref = firebase.storage().ref().child(imageName);
+    let ref = storage.ref().child(imageName);
 
     return ref
       .put(blob)
@@ -125,7 +118,7 @@ export default function AddForm({ navigation }) {
             values.thumbsDown = 0;
             values.comments = [];
 
-            firebase.firestore().collection('items').doc(imgHash).set(values);
+            db.collection('items').doc(imgHash).set(values);
             navigation.navigate('Map');
           }}
         >

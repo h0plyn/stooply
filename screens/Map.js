@@ -3,17 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import { View, StyleSheet, Text, Modal } from 'react-native';
 import styled from 'styled-components';
-
-import * as firebase from 'firebase';
-import secrets from '../secrets';
-
-if (!firebase.apps.length) {
-  firebase.initializeApp(secrets);
-} else {
-  firebase.app();
-}
-
-const db = firebase.firestore();
+import { db } from '../firebase';
 
 export default function Map({ navigation }) {
   const [items, setItems] = useState([]);
