@@ -1,7 +1,7 @@
-import React from 'react'
-import { TouchableOpacity, Text, View } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
-import styled from 'styled-components'
+import React from 'react';
+import { TouchableOpacity, Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import styled from 'styled-components';
 
 export default function StoopButton({ text, onPress }) {
   return (
@@ -11,13 +11,13 @@ export default function StoopButton({ text, onPress }) {
         {text === 'Camera Roll' && <Ionicons name="md-image" size={43} />}
       </ItemContainer>
     </TouchableOpacity>
-  )
+  );
 }
 
 const Container = styled.View`
   flex: 1;
   background-color: white;
-`
+`;
 
 const ItemContainer = styled.View`
   border-width: 2px;
@@ -33,4 +33,4 @@ const ItemContainer = styled.View`
   box-shadow: 1px 1px 5px lightgrey;
   justify-content: center;
   align-items: center;
-`
+`;

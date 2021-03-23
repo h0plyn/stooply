@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import MapView, { Marker, Callout } from 'react-native-maps';
-import { View, StyleSheet, Text, Modal } from 'react-native';
+import { StyleSheet } from 'react-native';
 import styled from 'styled-components';
 import { db } from '../firebase';
 

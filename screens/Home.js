@@ -1,16 +1,5 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import MapView, { Marker } from 'react-native-maps';
-import {
-  View,
-  StyleSheet,
-  Text,
-  Button,
-  ScrollView,
-  Image,
-  TouchableOpacity,
-  Touchable,
-} from 'react-native';
+import { View, Button, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 import logo from '../assets/logo.png';
 import { MaterialIcons } from '@expo/vector-icons';

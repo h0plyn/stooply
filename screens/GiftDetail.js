@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Image } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import styled from 'styled-components';
 import { TouchableOpacity } from 'react-native-gesture-handler';
