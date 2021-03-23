@@ -6,14 +6,14 @@ import {
   Keyboard,
   Text,
 } from 'react-native';
-import { Formik } from 'formik';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
-import StoopButton from '../shared/Button';
-import styled from 'styled-components';
 import * as yup from 'yup';
+import { Formik } from 'formik';
 import { storage, db } from '../firebase';
+import styled from 'styled-components';
+import StoopButton from '../shared/Button';
 
 const reviewSchema = yup.object({
   title: yup.string().required().min(4),
@@ -133,15 +133,9 @@ export default function AddForm({ navigation }) {
                   <ImageBox resizeMode="cover" source={{ uri: image }} />
                 )}
                 {image && gallery && (
-                  <Text
-                    style={{
-                      color: 'red',
-                      fontWeight: 'bold',
-                      alignSelf: 'center',
-                    }}
-                  >
+                  <UploadWarning>
                     Please wait until image is uploaded
-                  </Text>
+                  </UploadWarning>
                 )}
               </View>
               <InputBox
@@ -194,4 +188,10 @@ const ImageBox = styled.Image`
   margin-top: 15px;
   border-radius: 10px;
   align-items: center;
+`;
+
+const UploadWarning = styled.Text`
+  color: 'red';
+  font-weight: 'bold';
+  align-self: 'center';
 `;

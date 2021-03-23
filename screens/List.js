@@ -3,6 +3,7 @@ import { View, FlatList, TouchableOpacity, Image } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import styled from 'styled-components';
 import { db } from '../firebase';
+import ListCard from './ListCard';
 
 export default function List({ navigation }) {
   const [items, setItems] = useState([]);
@@ -24,48 +25,7 @@ export default function List({ navigation }) {
         <FlatList
           data={items}
           renderItem={({ item }) => (
-            <TouchableOpacity
-              onPress={() => navigation.navigate('GiftDetail', item)}
-              key={item.id}
-            >
-              <ItemContainer>
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    margin: 10,
-                  }}
-                >
-                  <Image
-                    style={{ width: 100, height: 100 }}
-                    source={{
-                      uri: item.imageUrl,
-                    }}
-                  />
-                  {/* Break out into ListCard */}
-                  <InfoContainer>
-                    <Title>{item.title}</Title>
-                    <Info>{item.added}</Info>
-                    <ThumbContainer>
-                      <MaterialIcons
-                        name="thumb-up"
-                        color="#00c87b"
-                        size={16}
-                      />
-                      <Count>{item.thumbsUp}</Count>
-                      <MaterialIcons
-                        style={{ marginLeft: 6 }}
-                        name="thumb-down"
-                        color="#fd5240"
-                        size={16}
-                      />
-                      <Count>{item.thumbsDown}</Count>
-                    </ThumbContainer>
-                  </InfoContainer>
-                  {/* End ListCard */}
-                </View>
-              </ItemContainer>
-            </TouchableOpacity>
+            <ListCard item={item} navigation={navigation} />
           )}
           keyExtractor={(item) => item.title}
         />
