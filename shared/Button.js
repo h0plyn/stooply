@@ -14,11 +14,6 @@ export default function StoopButton({ text, onPress }) {
   );
 }
 
-const Container = styled.View`
-  flex: 1;
-  background-color: white;
-`;
-
 const ItemContainer = styled.View`
   border-width: 2px;
   border-radius: 2px;
