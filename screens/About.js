@@ -1,7 +1,7 @@
-import React from 'react'
-import { View, Text, Image } from 'react-native'
-import styled from 'styled-components'
-import about from '../assets/about.png'
+import React from 'react';
+import { View, Text, Image } from 'react-native';
+import styled from 'styled-components';
+import about from '../assets/about.png';
 
 export default function About() {
   return (
@@ -13,7 +13,7 @@ export default function About() {
         neighborhood of Brooklyn in 2017.
       </FeatText>
     </Container>
-  )
+  );
 }
 
 const Container = styled.View`
@@ -25,14 +25,14 @@ const Container = styled.View`
   padding: 30px;
   padding-bottom: 150px;
   background-color: white;
-`
+`;
 
 const Title = styled.Text`
   font-size: 39px;
   color: black;
-`
+`;
 
 const FeatText = styled.Text`
   font-size: 24px;
   color: black;
-`
+`;

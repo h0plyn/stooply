@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
   View,
-  TextInput,
-  StyleSheet,
-  Button,
-  Image,
   Alert,
   TouchableWithoutFeedback,
   Keyboard,
@@ -68,19 +64,23 @@ export default function AddForm({ navigation }) {
         alert('Sorry, we need camera roll permissions to make this work!');
       }
     })();
+
     setGallery(true);
-    let result = await ImagePicker.launchImageLibraryAsync({
+
+    let currentImage = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: false,
       aspect: [4, 3],
       quality: 1,
     });
 
-    if (!result.cancelled) {
-      let fileName = result.uri.substring(result.uri.lastIndexOf('/') + 1);
-      setImage(result.uri);
+    if (!currentImage.cancelled) {
+      let fileName = currentImage.uri.substring(
+        currentImage.uri.lastIndexOf('/') + 1
+      );
+      setImage(currentImage.uri);
       setImgHash(fileName);
-      uploadImage(result.uri, fileName)
+      uploadImage(currentImage.uri, fileName)
         .then(() => {
           Alert.alert('Image Added!');
           setGallery(false);
@@ -177,7 +177,6 @@ export default function AddForm({ navigation }) {
           )}
         </Formik>
         <StoopButton onPress={pickImage} text="Camera Roll" />
-        {/* <Button title="Pick an image from camera roll" onPress={pickImage} /> */}
       </View>
     </TouchableWithoutFeedback>
   );
