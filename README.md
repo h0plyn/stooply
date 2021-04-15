@@ -113,7 +113,7 @@ See the [open issues](https://github.com/h0plyn/stooply/issues) for a list of pr
 
 ## Contact
 
-Ricky Rhodes - [@h0plyn](https://twitter.com/h0plyn) - ricky@rickyrhodes.com
+Ricky Rhodes - [@h0plyn](https://twitter.com/h0plyn) - devrickyrhodes@gmail.com
 
 Project Link: [https://github.com/h0plyn/stooply](https://github.com/h0plyn/stooply)
 
@@ -122,7 +122,7 @@ Project Link: [https://github.com/h0plyn/stooply](https://github.com/h0plyn/stoo
 ## Acknowledgements
 
 - _Thank you_ to my wife, Kaitlin, who was the inspiration for this project.
-- _Thank you_ to [Fullstack Academy](https://www.fullstackacademy.com/) for giving me the space to build this project
+- _Thank you_ to [Fullstack Academy](https://www.fullstackacademy.com/) for giving me the space to build this project.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
