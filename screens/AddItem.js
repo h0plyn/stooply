@@ -191,7 +191,7 @@ const ImageBox = styled.Image`
 `;
 
 const UploadWarning = styled.Text`
-  color: 'red';
-  font-weight: 'bold';
-  align-self: 'center';
+  color: red;
+  font-weight: bold;
+  align-self: center;
 `;
